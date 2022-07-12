@@ -1,0 +1,27 @@
+<div class="navbar px-4">
+  <%= link_to lists_path do %>
+  <% end %>
+  <%= link_to new_list_path do %>
+    <span class="btn btn-secondary rounded">New List</span>
+  <% end %>
+</div>
+<div class="container">
+<h1>
+  <%= @list.name %>
+</h1>
+<ul>
+  <% @list.bookmarks.each do |bookmark| %>
+    <li>
+      <% movie = Movie.find(bookmark.movie_id) %>
+      <%= movie.title %>
+      <%= link_to list_bookmark_path(@list, bookmark), method: :delete,
+            data: { confirm: "Are you sure?" } do %>
+            delete 
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+<%= link_to "new", new_list_bookmark_path(@list) %>
+
+<%= link_to "back to home", lists_path %>
+</div>
